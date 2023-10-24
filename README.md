@@ -34,7 +34,8 @@ If after running the line,
 ```
 python3 phil_main.py
 ```
-you get an error "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases." then you may need to run Philament with a slightly different line.
+you get an error:
+`Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases`, then you may need to run Philament with a slightly different line (see below).
 
 ```
 python phil_main.py
