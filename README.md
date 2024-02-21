@@ -1,10 +1,10 @@
-# Philament  <a href="https://github.com/maxwellbowser/philament/blob/master/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue"></a>  <a href="https://google.com"><img alt= "Citation reference: DOI" src="https://img.shields.io/badge/DOI-[insert here]-forestgreen"></a>  <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+# Philament  <a href="https://github.com/maxwellbowser/philament/blob/master/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue"></a>  <a href="https://www.cell.com/biophysreports/fulltext/S2667-0747(24)00006-5"><img alt= "Citation reference: DOI" src="https://img.shields.io/badge/DOI-10.1016/j.bpr.2024.100147-forestgreen"></a>  <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 Philament (Phil for short) allows for automated analysis of centroid objects, specifically designed for the In-Vitro Motility assay. By implementing Phil in the workflow for data analysis, hours can be shaved off of analysis times by chaining automated, accurate, and reproducible tracking with an easy to use UI.
 
 ## Installing
 
-1. Download the repository files (Green "<> Code" button, "Download ZIP")
+1. Download the repository files (Green "<> Code" button, "Local" Tab, "Download ZIP")
 
 2. Unzip all contents of the folder
 
@@ -34,8 +34,7 @@ If after running the line,
 ```
 python3 phil_main.py
 ```
-you get an error:
-`Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases`, then you may need to run Philament with a slightly different line (see below).
+you get an error "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases." then you may need to run Philament with a slightly different line.
 
 ```
 python phil_main.py
@@ -44,7 +43,8 @@ python phil_main.py
 ## Usage
 Philament starting user interface:
 
-![image](https://github.com/maxwellbowser/philament/assets/107726558/f90f2bdf-662f-4946-8c97-d41630f4ff02)
+![SuppFig1](https://github.com/maxwellbowser/philament/assets/107726558/85452f61-17de-46d2-a386-fc9aacc887aa)
+
 
 ### Pixel Size:
 “Pixel size” is the scale factor for the camera setup used. This allows for the conversions from pixel to a real-world measurement, such as microns/sec rather than pixels/second. The value 0.139, indicates that each pixel is 0.139 units of size in width and height. If the output is desired in pixel measurements, this field should be set to 1.
@@ -96,20 +96,20 @@ Information on Output File and Full Data Output can be found at (https://github.
 
 To allow for fast comparisons of many conditions, we have also implemented an output summary file, which displays for each condition, the total average speed, SEM, and number of tracks per condition. These statistics, however, do not include filtering, as our goal is to return raw data to the user which may be filtered according to their preferences.
 
-### Notes:
+## Notes:
 
 To strike a balance between user-friendly and customization, we chose to make some parameters of the tracking non-GUI adjustable. These variables are marked within the code and can be adjusted there. 
 
-#### Search Kernel:
+### Search Kernel:
 - This can be adjusted in phil_threshold.py, and there are two places this must be changed to have the desired effect. They are both saved as “kernel_size” which can be found with ctrl + f. Otherwise, the first instance is in the double_check function (which blurs the temp test thresholding images for the user) and the second is in the thresholding_files function, which does all of the blurring for the saved images. This did not seem important enough to include in the settings JSON file, so it was hard-coded in.
 
-#### Paths Image DPI (Dots-Per-Inch):
+### Paths Image DPI (Dots-Per-Inch):
 - The Paths image DPI refers to the resolution at which the path files are saved, if that option is selected in the main GUI. If one would like to use these path images in a presentation or publication, this is a very helpful variable to change. The default DPI is 150, and may be increased or decreased to any amount, (a rule of thumb is 400 is plenty clear enough for a publication, if enlarging, then higher is better). This is found in phil_track.py, again ctrl + f for “dpi”. Very simple to change, however we recommend that this is reduced for regular usage, to save on storage space.
 
-#### Thresholding Sample Size:
+### Thresholding Sample Size:
 - By default, for every 50 files that are selected, one more image is added to the pool for thresholding (Max of 5). This can be adjusted in phil_threshold.py, in the sample_generation function. Documentation is written to guide the user through this, and if the user would like to change the max # of images shown, this can also be changed in the sample_generation function. Our low max # of samples (set at 5) was intentional, with our reasoning being that this is meant to be an automated process, so giving 20 sample images just turns it back into ImageJ, therefore we recommend keeping the max number low.
 
-#### GUI Scaling:
+### GUI Scaling:
 - To account for loaded images with extremely high resolutions, which need to be scaled for viewing, we designed Phil to have ratiometric GUIs. This means that the thresholding sample images will always be ½ of the width of the screen (so both regular and thresholded images can fit), no matter what the size of the captured image is. To adjust this is, it is a bit more involved, however not overwhelming. The code to do this is in both phil_main.py and phil_threshold.py, and we have added comments “SCALING” above all of the places needed to change it. We recommend adjusting small amounts before running to see the effect, but ultimately up to the user’s best judgment.	
 
 
